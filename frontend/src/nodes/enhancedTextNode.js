@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
+import { motion } from 'framer-motion';
 import './nodeStyles.css';
 
 const EnhancedTextNode = ({ id, data, useStore }) => {
@@ -42,14 +43,14 @@ const EnhancedTextNode = ({ id, data, useStore }) => {
     const text = data?.text || '{{input}}';
     const variables = extractVariables(text);
     const newDimensions = calculateDimensions(text);
-    
+
     const newDynamicInputs = variables.map((variable, index) => ({
       id: `${id}-${variable}`,
       type: 'target',
       position: 'left',
       style: { top: `${30 + index * 30}px` }
     }));
-    
+
     setDynamicInputs(newDynamicInputs);
     setDimensions(newDimensions);
   }, [data?.text, id]);
@@ -61,10 +62,15 @@ const EnhancedTextNode = ({ id, data, useStore }) => {
   };
 
   return (
-    <div 
-      className="abstract-node text-node" 
+    <motion.div
+      className="relative rounded-2xl shadow-lg text-node"
       style={{ width: `${dimensions.width}px`, height: `${dimensions.height}px` }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
+      {/* Top accent bar with gradient */}
+      <div className="h-2 bg-gradient-to-r from-yellow-500 via-yellow-400 to-orange-300 rounded-t-2xl"></div>
+
       {/* Dynamic input handles */}
       {dynamicInputs.map((input) => (
         <Handle
@@ -73,35 +79,37 @@ const EnhancedTextNode = ({ id, data, useStore }) => {
           position={input.position}
           id={input.id}
           style={input.style}
+          className="w-6 h-6 bg-blue-400 border-2 border-white z-10 !rounded-full pointer-events-all"
         />
       ))}
+
+      {/* Node content */}
+      <div className="glass-card border border-glass-border rounded-2xl p-4 overflow-visible">
+        <div className="font-bold text-white text-sm mb-3 flex items-center gap-2">
+          <span className="node-accent-text">Text</span>
+        </div>
+
+        <div className="mb-3">
+          <label className="block text-xs font-medium text-gray-300 mb-1">
+            Text:
+          </label>
+          <textarea
+            value={data?.text || '{{input}}'}
+            onChange={handleTextChange}
+            rows={Math.min(Math.max((data?.text || '').split('\n').length, 3), 10)}
+            className="w-full bg-dark-800/50 border border-dark-600 rounded-lg py-1.5 px-2 text-sm text-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-y"
+          />
+        </div>
+      </div>
 
       {/* Output handle */}
       <Handle
         type="source"
         position={Position.Right}
         id={`${id}-output`}
+        className="w-6 h-6 bg-cyan-400 border-2 border-white z-10 !rounded-full pointer-events-all"
       />
-
-      {/* Node content */}
-      <div className="node-header">
-        <span>Text</span>
-      </div>
-
-      <div className="node-body">
-        <div className="field">
-          <label>
-            Text:
-            <textarea
-              value={data?.text || '{{input}}'}
-              onChange={handleTextChange}
-              rows={Math.min(Math.max((data?.text || '').split('\n').length, 3), 10)}
-              style={{ width: '100%', minHeight: '60px' }}
-            />
-          </label>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 

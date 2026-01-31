@@ -1,7 +1,7 @@
 // submit.js
 
 import { useStore } from "./store";
-import styles from "./App.module.css";
+import { motion } from 'framer-motion';
 
 export const SubmitButton = () => {
   const { nodes, edges } = useStore((state) => ({
@@ -38,12 +38,14 @@ export const SubmitButton = () => {
   };
 
   return (
-    <button
-      className={styles.submitButton}
+    <motion.button
+      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-violet-600 text-white font-medium rounded-xl shadow-lg hover:from-blue-500 hover:to-violet-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-all duration-200"
       type="button"
       onClick={handleSubmit}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
-      Submit
-    </button>
+      Analyze Pipeline
+    </motion.button>
   );
 };

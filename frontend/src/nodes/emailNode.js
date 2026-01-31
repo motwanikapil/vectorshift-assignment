@@ -32,7 +32,8 @@ const EmailNode = ({ id, data, useStore }) => {
     ],
     width: 250,
     height: 200,
-    className: 'email-node'
+    className: 'email-node',
+    type: 'email'
   };
 
   return <BaseNode id={id} data={emailData} updateNodeField={useStore?.getState().updateNodeField} />;

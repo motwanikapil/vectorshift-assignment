@@ -29,7 +29,8 @@ const InputNode = ({ id, data, useStore }) => {
     ],
     width: 200,
     height: 80,
-    className: 'input-node'
+    className: 'input-node',
+    type: 'input'
   };
 
   return <BaseNode id={id} data={inputData} updateNodeField={useStore?.getState().updateNodeField} />;

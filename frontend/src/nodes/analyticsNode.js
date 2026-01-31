@@ -42,7 +42,8 @@ const AnalyticsNode = ({ id, data, useStore }) => {
     ],
     width: 300,
     height: 240,
-    className: 'analytics-node'
+    className: 'analytics-node',
+    type: 'analytics'
   };
 
   return <BaseNode id={id} data={analyticsData} updateNodeField={useStore?.getState().updateNodeField} />;

@@ -44,7 +44,8 @@ const ConditionalNode = ({ id, data, useStore }) => {
     ],
     width: 250,
     height: 120,
-    className: 'conditional-node'
+    className: 'conditional-node',
+    type: 'conditional'
   };
 
   return <BaseNode id={id} data={conditionalData} updateNodeField={useStore?.getState().updateNodeField} />;

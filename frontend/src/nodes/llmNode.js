@@ -34,7 +34,8 @@ const LLMNode = ({ id, data, useStore }) => {
     ],
     width: 200,
     height: 80,
-    className: 'llm-node'
+    className: 'llm-node',
+    type: 'llm'
   };
 
   return <BaseNode id={id} data={llmData} updateNodeField={useStore?.getState().updateNodeField} />;

@@ -49,7 +49,8 @@ const DatabaseNode = ({ id, data, useStore }) => {
     ],
     width: 300,
     height: 150,
-    className: 'database-node'
+    className: 'database-node',
+    type: 'database'
   };
 
   return <BaseNode id={id} data={dbData} updateNodeField={useStore?.getState().updateNodeField} />;

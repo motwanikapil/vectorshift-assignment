@@ -48,7 +48,8 @@ const ApiNode = ({ id, data, useStore }) => {
     ],
     width: 250,
     height: 120,
-    className: 'api-node'
+    className: 'api-node',
+    type: 'api'
   };
 
   return <BaseNode id={id} data={apiData} updateNodeField={useStore?.getState().updateNodeField} />;

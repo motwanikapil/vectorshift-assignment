@@ -30,7 +30,8 @@ const FilterNode = ({ id, data, useStore }) => {
     ],
     width: 200,
     height: 100,
-    className: 'filter-node'
+    className: 'filter-node',
+    type: 'filter'
   };
 
   return <BaseNode id={id} data={filterData} updateNodeField={useStore?.getState().updateNodeField} />;

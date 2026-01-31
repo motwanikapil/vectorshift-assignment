@@ -50,7 +50,8 @@ const NotificationNode = ({ id, data, useStore }) => {
     ],
     width: 320,
     height: 280,
-    className: 'notification-node'
+    className: 'notification-node',
+    type: 'notification'
   };
 
   return <BaseNode id={id} data={notificationData} updateNodeField={useStore?.getState().updateNodeField} />;

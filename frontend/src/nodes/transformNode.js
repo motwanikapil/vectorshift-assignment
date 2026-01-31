@@ -33,7 +33,8 @@ const TransformNode = ({ id, data, useStore }) => {
     ],
     width: 250,
     height: 120,
-    className: 'transform-node'
+    className: 'transform-node',
+    type: 'transform'
   };
 
   return <BaseNode id={id} data={transformData} updateNodeField={useStore?.getState().updateNodeField} />;

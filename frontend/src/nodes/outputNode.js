@@ -29,7 +29,8 @@ const OutputNode = ({ id, data, useStore }) => {
     ],
     width: 200,
     height: 80,
-    className: 'output-node'
+    className: 'output-node',
+    type: 'output'
   };
 
   return <BaseNode id={id} data={outputData} updateNodeField={useStore?.getState().updateNodeField} />;

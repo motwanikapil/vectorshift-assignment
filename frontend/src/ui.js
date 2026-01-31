@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 import { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
+import ReactFlow, { Controls, Background, MiniMap, BaseEdge } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import { InputNode } from './nodes/inputNode';
@@ -25,6 +25,19 @@ import 'reactflow/dist/style.css';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
+
+// Define custom edge type
+const edgeTypes = {
+  default: ({ ...rest }) => (
+    <BaseEdge
+      {...rest}
+      style={{
+        strokeWidth: 2,
+        stroke: 'url(#gradient)',
+      }}
+    />
+  ),
+};
 
 // Enhanced node types to pass the store to each node
 const nodeTypes = {
@@ -123,13 +136,44 @@ export const PipelineUI = () => {
                 onDragOver={onDragOver}
                 onInit={setReactFlowInstance}
                 nodeTypes={nodeTypes}
+                edgeTypes={edgeTypes}
                 proOptions={proOptions}
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
+                elementsSelectable={true}
+                nodesConnectable={true}
+                edgesUpdatable={true}
+                className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
             >
-                <Background color="#aaa" gap={gridSize} />
-                <Controls />
-                <MiniMap />
+                <Background
+                  gap={gridSize}
+                  size={1}
+                  color="#334155"
+                  className="opacity-20"
+                />
+                <Controls
+                  className="bg-glass-bg border border-glass-border rounded-xl backdrop-blur-md p-1"
+                  style={{
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                  }}
+                />
+                <MiniMap
+                  className="bg-glass-bg border border-glass-border rounded-xl backdrop-blur-md"
+                  style={{
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+                  }}
+                  nodeColor={'#4f46e5'}
+                  maskColor={'rgba(15, 23, 42, 0.8)'}
+                />
+                <svg>
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="50%" stopColor="#8b5cf6" />
+                      <stop offset="100%" stopColor="#06b6d4" />
+                    </linearGradient>
+                  </defs>
+                </svg>
             </ReactFlow>
         </div>
         </>

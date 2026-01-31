@@ -58,7 +58,8 @@ const SchedulerNode = ({ id, data, useStore }) => {
     ],
     width: 320,
     height: 260,
-    className: 'scheduler-node'
+    className: 'scheduler-node',
+    type: 'scheduler'
   };
 
   return <BaseNode id={id} data={schedulerData} updateNodeField={useStore?.getState().updateNodeField} />;

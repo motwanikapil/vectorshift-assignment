@@ -38,7 +38,8 @@ const WebhookNode = ({ id, data, useStore }) => {
     ],
     width: 300,
     height: 220,
-    className: 'webhook-node'
+    className: 'webhook-node',
+    type: 'webhook'
   };
 
   return <BaseNode id={id} data={webhookData} updateNodeField={useStore?.getState().updateNodeField} />;
